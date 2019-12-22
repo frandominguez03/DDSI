@@ -119,13 +119,18 @@ CREATE TABLE IF NOT EXISTS `entradas` (
 );
 
 -- -----------------------------------------------------
--- Table `compras`
+-- Table `comprasPorUsuariosEnEdicion`
 -- -----------------------------------------------------
 
-DROP TABLE IF EXISTS `compras`;
+DROP TABLE IF EXISTS `comprasPorUsuariosEnEdicion`;
 
-CREATE TABLE IF NOT EXISTS `compras` (
+CREATE TABLE IF NOT EXISTS `comprasPorUsuariosEnEdicion` (
     `codcompra` INT NOT NULL AUTO_INCREMENT,
+    `coduser` INT NOT NULL AUTO_INCREMENT,
+    `numedicion` INT NOT NULL AUTO_INCREMENT,
+    `anoedicion` INT NOT NULL,
+    FOREIGN KEY (`coduser`) REFERENCES `usuarios` (`coduser`),
+    FOREIGN KEY (`numedicion`,`anoedicion`) REFERENCES `edicion` (`numedicion`,`anoedicion`),
     PRIMARY KEY (`codcompra`)
 );
 
@@ -228,4 +233,156 @@ DROP TABLE IF EXISTS `contraofertasrechazadas`;
 CREATE TABLE IF NOT EXISTS `contraofertasrechazadas` (
     `codcontraoferta` INT NOT NULL AUTO_INCREMENT,
     FOREIGN KEY (`codcontraoferta`) REFERENCES `contraofertas` (`codcontraoferta`)
+);
+
+-- -----------------------------------------------------
+-- Table `arbitra`
+-- -----------------------------------------------------
+
+DROP TABLE IF EXISTS `arbitra`
+
+CREATE TABLE IF NOT EXISTS `arbitra`(
+    `codarbitro` INT NOT NULL AUTO_INCREMENT,
+    `idpartido` INT NOT NULL AUTO_INCREMENT,
+    FOREIGN KEY (`codarbitro`) REFERENCES `arbitros` (`codarbitro`),
+    FOREIGN KEY (`idpartido`) REFERENCES `partidos` (`idpartido`),
+    PRIMARY KEY(`codarbitro`,`idpartido`)
+);
+
+-- -----------------------------------------------------
+-- Table `gestiona`
+-- -----------------------------------------------------
+
+DROP TABLE IF EXISTS `gestiona`
+
+CREATE TABLE IF NOT EXISTS `gestiona`(
+    `codarbitro` INT NOT NULL AUTO_INCREMENT,
+    `codoferta` INT NOT NULL AUTO_INCREMENT
+    FOREIGN KEY (`codarbitro`) REFERENCES `arbitros` (`codarbitro`),
+    FOREIGN KEY (`codoferta`) REFERENCES `ofertas` (`codoferta`),
+    PRIMARY KEY(`codarbitro`,`codoferta`)
+);
+
+-- -----------------------------------------------------
+-- Table `ofertar`
+-- -----------------------------------------------------
+
+DROP TABLE IF EXISTS `ofertar`
+
+CREATE TABLE IF NOT EXISTS `ofertar`(
+    `codoferta` INT NOT NULL AUTO_INCREMENT
+    `codcontraoferta` INT NOT NULL AUTO_INCREMENT,
+    FOREIGN KEY (`codoferta`) REFERENCES `ofertas` (`codoferta`),
+    FOREIGN KEY (`codcontraoferta`) REFERENCES `contraofertas` (`codcontraoferta`)
+    PRIMARY KEY(`codoferta`)
+);
+
+-- -----------------------------------------------------
+-- Table `contraofertar`
+-- -----------------------------------------------------
+
+DROP TABLE IF EXISTS `contraofertar`
+
+CREATE TABLE IF NOT EXISTS `contraofertar`(
+    `codoferta` INT NOT NULL AUTO_INCREMENT
+    `codcontraoferta` INT NOT NULL AUTO_INCREMENT,
+    FOREIGN KEY (`codoferta`) REFERENCES `ofertas` (`codoferta`),
+    FOREIGN KEY (`codcontraoferta`) REFERENCES `contraofertas` (`codcontraoferta`)
+    PRIMARY KEY(`codcontraoferta`)
+);
+
+-- -----------------------------------------------------
+-- Table `contrato`
+-- -----------------------------------------------------
+
+DROP TABLE IF EXISTS `contrato`
+
+CREATE TABLE IF NOT EXISTS `contrato`(
+    `codoferta` INT NOT NULL AUTO_INCREMENT
+    `numedicion` INT NOT NULL AUTO_INCREMENT,
+    `anoedicion` INT NOT NULL,
+    FOREIGN KEY (`codoferta`) REFERENCES `ofertas` (`codoferta`),
+    FOREIGN KEY (`numedicion`,`anoedicion`) REFERENCES `edicion` (`numedicion`,`anoedicion`),
+    PRIMARY KEY(`codoferta`)
+);
+
+-- -----------------------------------------------------
+-- Table `contiene`
+-- -----------------------------------------------------
+
+DROP TABLE IF EXISTS `contiene`
+
+CREATE TABLE IF NOT EXISTS `contiene`(
+    `codcompra` INT NOT NULL AUTO_INCREMENT
+    `codentrada` INT NOT NULL AUTO_INCREMENT,
+    `cantiad` INT NOT NULL,
+    FOREIGN KEY (`codcompra`) REFERENCES `compras` (`codcompra`),
+    FOREIGN KEY (`codentrada`) REFERENCES `entradas` (`codentrada`),
+    PRIMARY KEY(`codcompra`,`codentrada`)
+);
+
+-- -----------------------------------------------------
+-- Table `trabaja`
+-- -----------------------------------------------------
+
+DROP TABLE IF EXISTS `trabaja`
+
+CREATE TABLE IF NOT EXISTS `trabaja`(
+    `codtrabajador` INT NOT NULL AUTO_INCREMENT
+    `numedicion` INT NOT NULL AUTO_INCREMENT,
+    `anoedicion` INT NOT NULL,
+    FOREIGN KEY (`codtrabajador`) REFERENCES `trabajadores` (`codtrabajador`),
+    FOREIGN KEY (`numedicion`,`anoedicion`) REFERENCES `edicion` (`numedicion`,`anoedicion`),
+    PRIMARY KEY(`codtrabjador`,`numedicion`,`anoedicion`)
+);
+
+-- -----------------------------------------------------
+-- Table `participan`
+-- -----------------------------------------------------
+
+DROP TABLE IF EXISTS `participan`
+
+CREATE TABLE IF NOT EXISTS `participan`(
+    `codjugador` INT NOT NULL AUTO_INCREMENT
+    `numedicion` INT NOT NULL AUTO_INCREMENT,
+    `anoedicion` INT NOT NULL,
+    FOREIGN KEY (`codjugador`) REFERENCES `jugadores` (`codjugador`),
+    FOREIGN KEY (`numedicion`,`anoedicion`) REFERENCES `edicion` (`numedicion`,`anoedicion`),
+    PRIMARY KEY(`codjugador`,`numedicion`,`anoedicion`)
+);
+
+-- -----------------------------------------------------
+-- Table `asignar`
+-- -----------------------------------------------------
+
+DROP TABLE IF EXISTS `asignar`
+
+CREATE TABLE IF NOT EXISTS `asignar`(
+    `codtrabajador` INT NOT NULL AUTO_INCREMENT
+    `numedicion` INT NOT NULL AUTO_INCREMENT,
+    `anoedicion` INT NOT NULL,
+    `codpista` INT NOT NULL AUTO_INCREMENT,
+    `fechaInicio` DATE NOT NULL,
+    `fechaFin` DATE NOT NULL,
+    FOREIGN KEY (`codtrabajador`) REFERENCES `trabajadores` (`codtrabajador`),
+    FOREIGN KEY (`codpista`) REFERENCES `pistas` (`codpista`),
+    FOREIGN KEY (`numedicion`,`anoedicion`) REFERENCES `edicion` (`numedicion`,`anoedicion`),
+    PRIMARY KEY(`codtrabajador`,`numedicion`,`anoedicion`,`codpista`,`fechaInicio`)
+);
+
+-- -----------------------------------------------------
+-- Table `juegan`
+-- -----------------------------------------------------
+
+DROP TABLE IF EXISTS `juegan`
+
+CREATE TABLE IF NOT EXISTS `juegan`(
+    `codjugador` INT NOT NULL AUTO_INCREMENT
+    `numedicion` INT NOT NULL AUTO_INCREMENT,
+    `idpartido` INT NOT NULL AUTO_INCREMENT,
+    `anoedicion` INT NOT NULL,
+    FOREIGN KEY (`codjugador`) REFERENCES `jugadores` (`codjugador`),
+    FOREIGN KEY (`idpartido`) REFERENCES `partidos` (`idpartido`),
+    FOREIGN KEY (`numedicion`,`anoedicion`) REFERENCES `edicion` (`numedicion`,`anoedicion`),
+    PRIMARY KEY(`codjugador`,`numedicion`,`anoedicion`,`idpartido`)
 );
