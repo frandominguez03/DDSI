@@ -68,6 +68,7 @@ CREATE TABLE IF NOT EXISTS `partidos` (
 DROP TABLE IF EXISTS `jugadores`;
 
 CREATE TABLE IF NOT EXISTS `jugadores` (
+    `codjugador` INT NOT NULL AUTO_INCREMENT,
     `email` VARCHAR(320) NOT NULL,
     `telf` INT NOT NULL,
     `nombre` VARCHAR(150) NOT NULL,
@@ -82,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `jugadores` (
 DROP TABLE IF EXISTS `arbitros`;
 
 CREATE TABLE IF NOT EXISTS `arbitros` (
-    `codarbitro` INT NOT NULL AUTO_INCREMENT
+    `codarbitro` INT NOT NULL AUTO_INCREMENT,
     `email` VARCHAR(320) NOT NULL,
     `telf` INT NOT NULL,
     `nombre` VARCHAR(150) NOT NULL,
