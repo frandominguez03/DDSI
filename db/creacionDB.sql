@@ -159,7 +159,7 @@ DROP TABLE IF EXISTS `compraspagadas`;
 
 CREATE TABLE IF NOT EXISTS `compraspagadas` (
     `codcompra` INT NOT NULL AUTO_INCREMENT,
-    FOREIGN KEY (`codcompra`) REFERENCES `compras` (`codcompra`)
+    FOREIGN KEY (`codcompra`) REFERENCES `comprasfinalizadas` (`codcompra`)
 );
 
 -- -----------------------------------------------------
