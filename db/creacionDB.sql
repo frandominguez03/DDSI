@@ -170,7 +170,6 @@ DROP TABLE IF EXISTS `ofertas`;
 CREATE TABLE IF NOT EXISTS `ofertas` (
     `codoferta` INT NOT NULL AUTO_INCREMENT
     `salario` INT NOT NULL,
-    `fecha` DATE NOT NULL,
     PRIMARY KEY (`codoferta`)
 );
 
@@ -183,7 +182,6 @@ DROP TABLE IF EXISTS `contraofertas`;
 CREATE TABLE IF NOT EXISTS `contraofertas` (
     `codcontraoferta` INT NOT NULL AUTO_INCREMENT
     `salario` INT NOT NULL,
-    `fecha` DATE NOT NULL,
     PRIMARY KEY (`codcontraoferta`)
 );
 
