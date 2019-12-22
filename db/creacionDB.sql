@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `jugadores` (
     `telf` INT NOT NULL,
     `nombre` VARCHAR(150) NOT NULL,
     `apellidos` VARCHAR(400) NOT NULL,
-    PRIMARY KEY (`email`, `telf`)
+    PRIMARY KEY (`codjugador`)
 );
 
 -- -----------------------------------------------------
@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS `arbitros` (
 DROP TABLE IF EXISTS `usuarios`;
 
 CREATE TABLE IF NOT EXISTS `usuarios` (
-    `coduser` INT NOT NULL AUTO_INCREMENT
+    `coduser` INT NOT NULL AUTO_INCREMENT,
     `email` VARCHAR(320) NOT NULL,
     `nombre` VARCHAR(150) NOT NULL,
     `apellidos` VARCHAR(400) NOT NULL,
@@ -112,7 +112,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
 DROP TABLE IF EXISTS `entradas`;
 
 CREATE TABLE IF NOT EXISTS `entradas` (
-    `codentrada` INT NOT NULL AUTO_INCREMENT
+    `codentrada` INT NOT NULL AUTO_INCREMENT,
     `tipo` VARCHAR(320) NOT NULL,
     `precio` INT NOT NULL,
     PRIMARY KEY (`coduser`)
@@ -125,7 +125,7 @@ CREATE TABLE IF NOT EXISTS `entradas` (
 DROP TABLE IF EXISTS `compras`;
 
 CREATE TABLE IF NOT EXISTS `compras` (
-    `codcompra` INT NOT NULL AUTO_INCREMENT
+    `codcompra` INT NOT NULL AUTO_INCREMENT,
     PRIMARY KEY (`codcompra`)
 );
 
@@ -136,7 +136,7 @@ CREATE TABLE IF NOT EXISTS `compras` (
 DROP TABLE IF EXISTS `comprasfinalizadas`;
 
 CREATE TABLE IF NOT EXISTS `comprasfinalizadas` (
-    `codcompra` INT NOT NULL AUTO_INCREMENT
+    `codcompra` INT NOT NULL AUTO_INCREMENT,
     FOREIGN KEY (`codcompra`) REFERENCES `compras` (`codcompra`)
 );
 
@@ -147,7 +147,7 @@ CREATE TABLE IF NOT EXISTS `comprasfinalizadas` (
 DROP TABLE IF EXISTS `comprasiniciadas`;
 
 CREATE TABLE IF NOT EXISTS `comprasiniciadas` (
-    `codcompra` INT NOT NULL AUTO_INCREMENT
+    `codcompra` INT NOT NULL AUTO_INCREMENT,
     FOREIGN KEY (`codcompra`) REFERENCES `compras` (`codcompra`)
 );
 
@@ -158,7 +158,7 @@ CREATE TABLE IF NOT EXISTS `comprasiniciadas` (
 DROP TABLE IF EXISTS `compraspagadas`;
 
 CREATE TABLE IF NOT EXISTS `compraspagadas` (
-    `codcompra` INT NOT NULL AUTO_INCREMENT
+    `codcompra` INT NOT NULL AUTO_INCREMENT,
     FOREIGN KEY (`codcompra`) REFERENCES `compras` (`codcompra`)
 );
 
@@ -181,7 +181,7 @@ CREATE TABLE IF NOT EXISTS `ofertas` (
 DROP TABLE IF EXISTS `contraofertas`;
 
 CREATE TABLE IF NOT EXISTS `contraofertas` (
-    `codcontraoferta` INT NOT NULL AUTO_INCREMENT
+    `codcontraoferta` INT NOT NULL AUTO_INCREMENT,
     `salario` INT NOT NULL,
     PRIMARY KEY (`codcontraoferta`)
 );
@@ -193,7 +193,7 @@ CREATE TABLE IF NOT EXISTS `contraofertas` (
 DROP TABLE IF EXISTS `ofertasaceptadas`;
 
 CREATE TABLE IF NOT EXISTS `ofertasaceptadas` (
-    `codoferta` INT NOT NULL AUTO_INCREMENT
+    `codoferta` INT NOT NULL AUTO_INCREMENT,
     FOREIGN KEY (`codoferta`) REFERENCES `ofertas` (`codoferta`)
 );
 
@@ -204,7 +204,7 @@ CREATE TABLE IF NOT EXISTS `ofertasaceptadas` (
 DROP TABLE IF EXISTS `ofertasrechazadas`;
 
 CREATE TABLE IF NOT EXISTS `ofertasrechazadas` (
-    `codoferta` INT NOT NULL AUTO_INCREMENT
+    `codoferta` INT NOT NULL AUTO_INCREMENT,
     FOREIGN KEY (`codoferta`) REFERENCES `ofertas` (`codoferta`)
 );
 
@@ -215,7 +215,7 @@ CREATE TABLE IF NOT EXISTS `ofertasrechazadas` (
 DROP TABLE IF EXISTS `contraofertasaceptadas`;
 
 CREATE TABLE IF NOT EXISTS `contraofertasaceptadas` (
-    `codcontraoferta` INT NOT NULL AUTO_INCREMENT
+    `codcontraoferta` INT NOT NULL AUTO_INCREMENT,
     FOREIGN KEY (`codcontraoferta`) REFERENCES `contraofertas` (`codcontraoferta`)
 );
 
@@ -226,6 +226,6 @@ CREATE TABLE IF NOT EXISTS `contraofertasaceptadas` (
 DROP TABLE IF EXISTS `contraofertasrechazadas`;
 
 CREATE TABLE IF NOT EXISTS `contraofertasrechazadas` (
-    `codcontraoferta` INT NOT NULL AUTO_INCREMENT
+    `codcontraoferta` INT NOT NULL AUTO_INCREMENT,
     FOREIGN KEY (`codcontraoferta`) REFERENCES `contraofertas` (`codcontraoferta`)
 );
