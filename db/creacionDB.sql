@@ -315,7 +315,7 @@ DROP TABLE IF EXISTS `contiene`
 CREATE TABLE IF NOT EXISTS `contiene`(
     `codcompra` INT NOT NULL AUTO_INCREMENT
     `codentrada` INT NOT NULL AUTO_INCREMENT,
-    `cantiad` INT NOT NULL,
+    `cantidad` INT NOT NULL,
     FOREIGN KEY (`codcompra`) REFERENCES `compras` (`codcompra`),
     FOREIGN KEY (`codentrada`) REFERENCES `entradas` (`codentrada`),
     PRIMARY KEY(`codcompra`,`codentrada`)
