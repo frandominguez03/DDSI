@@ -7,7 +7,9 @@ DECLARE
     fechaL INTEGER;
     fechaS INTEGER;
 BEGIN
-    SELECT to_number(to_char(fechaInicio)),to_number(to_char(fechaFin)) INTO fechaL,fechaS FROM asignar WHERE codtrabajador = :new.codtrabajador;
+    SELECT * INTO fechaL,fechaS FROM asignar WHERE codtrabajador = :new.codtrabajador 
+    AND year(fechaInicio) = year(:new.fechaInicio) AND year(fechaFin) = year(:new.fechaFin) AND month(fechaInicio) = month(:new.fechaInicio) 
+    AND month(fechaFin) = month(:new.fechaFin) AND day(fechaInicio) = day(:new.fechaInicio) AND day(fechaFin) = day(:new.fechaFin);
     if(fechaL - fechaS < 10000) THEN
         raise_application_error(-20600, :new.codtrabajador || 'No se le puede asignar el trabajo con menos de 1 hora de diferencia');
 END
