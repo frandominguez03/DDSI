@@ -1,7 +1,7 @@
 -- Disparador para impedir que el mismo usuario pueda iniciar más de una compra al mismo tiempo
-CREATE OR REPLACE TRIGGER compraSimultanea
+create or replace TRIGGER compraSimultanea
     BEFORE
-    INSERT ON comprasiniciadas
+    INSERT ON COMPRASPORUSUARIOSENEDICION
     FOR EACH ROW
 DECLARE
     cuentainicializada INTEGER;
@@ -13,6 +13,6 @@ BEGIN
 
     IF(cuentainicializada > cuentafinalizada)
     THEN raise_application_error
-    (-20600,:new.coduser||"No se puede iniciar más de una compra a la vez");
+    (-20600,:new.coduser||'No se puede iniciar mas de una compra a la vez');
     END IF;
 END;
