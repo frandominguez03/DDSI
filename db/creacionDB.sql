@@ -4,7 +4,7 @@
     -- Pablo Cordero Romero
     -- Francisco Domínguez Lorente
     -- David Gómez Hernández
-    -- Miguel Ángel Posadas Arráez
+    -- Miguel �?ngel Posadas Arráez
 
 
 -- -----------------------------------------------------
@@ -295,8 +295,8 @@ CREATE TABLE  asignar(
     numedicion INT NOT NULL ,
     anoedicion INT NOT NULL,
     codpista INT NOT NULL ,
-    fechaInicio DATE NOT NULL,
-    fechaFin DATE NOT NULL,
+    fechaInicio DATETIME NOT NULL,
+    fechaFin DATETIME NOT NULL,
     FOREIGN KEY (codtrabajador) REFERENCES trabajadores (codtrabajador),
     FOREIGN KEY (codpista) REFERENCES pistas (codpista),
     FOREIGN KEY (numedicion,anoedicion) REFERENCES edicion (numedicion,anoedicion),
