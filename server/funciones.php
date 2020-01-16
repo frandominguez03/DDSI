@@ -74,4 +74,34 @@ function anadeTipoEntrada($codentrada, $tipo, $precio):bool
     return false;
 }
 
+
+/*
+ * @brief Asigna una pista y un horario a un trabajador
+ * @param int codjugador
+ * @param int numedicion
+ * @param int anoedicion
+ * @param int codpista
+ * @param date fechaInicio
+ * @param date fechaFin
+ * @return bool (exito o no)
+ * @throws Exception
+ */
+function asignarTrabajador($codjugador, $numedicion, $anoedicion, $codpista, $fechainicio, $fechafin):bool
+{
+    //Inicio la conexión a la base de datos
+    $con = new DBCon();
+    
+    $insercion = $this->con->prepare("INSERT INTO `asignar` (`codjugador`, `numedicion`, `anoedicion`,`codpista`,`fechainicio`,`fechafin`) VALUES (?, ?, ?, ?, ?, ?);");
+    if($insercion && $insercion->bind_param($codjugador, $numedicion, $anoedicion, $codpista, $fechainicio, $fechafin) && $insercion->execute())
+        return true;
+    
+    else
+        throw new Exception("Error al insertar en la base de datos", 201902);
+    
+    $insercion->close();
+
+    $con->close();
+    return false;
+}
+
 ?>
