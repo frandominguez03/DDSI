@@ -48,4 +48,30 @@ function aceptarOferta($idOferta):bool
     return false; 
 }
 
+/*
+ * @brief Introduce un nuevo tipo de entrada en la base de datos
+ * @param int codentrada
+ * @param string tipo
+ * @param float precio
+ * @return bool (exito o no)
+ * @throws Exception
+ */
+function anadeTipoEntrada($codentrada, $tipo, $precio):bool
+{
+    //Inicio la conexión a la base de datos
+    $con = new DBCon();
+    
+    $insercion = $this->con->prepare("INSERT INTO `entradas` (`codentrada`, `tipo`, `tipo`) VALUES (?, ?, ?);");
+    if($insercion && $insercion->bind_param($codentrada, $tipo, $precio) && $insercion->execute())
+        return true;
+    
+    else
+        throw new Exception("Error al insertar en la base de datos", 201902);
+    
+    $insercion->close();
+
+    $con->close();
+    return false;
+}
+
 ?>
