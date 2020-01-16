@@ -104,4 +104,24 @@ function asignarTrabajador($codjugador, $numedicion, $anoedicion, $codpista, $fe
     return false;
 }
 
+/*
+ * @brief Muestra los partidos de una pista
+ * @param int codpista
+ */
+function mostrarPartidoPista($codpista){
+    //Inicio la conexión a la base de datos
+    $con = new DBCon();
+
+    $consulta= $this->con->prepare("SELECT 'idpartido' FROM 'partidosenpista' WHERE 'codpista' = $codpista;");
+
+    if($consulta && $consulta->bind_param($codpista) && $consulta->execute())
+        echo $consulta;
+    
+    else 
+        throw new Exception("Error al realizar la consulta", 201902);
+
+    $consulta->close();
+    $con->close();
+}
+
 ?>
