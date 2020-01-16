@@ -317,3 +317,11 @@ CREATE TABLE  juegan(
     FOREIGN KEY (numedicion,anoedicion) REFERENCES edicion (numedicion,anoedicion),
     PRIMARY KEY(codjugador,numedicion,anoedicion,idpartido)
 );
+
+
+CREATE TABLE  partidosenpista(
+    idpartido INT NOT NULL PRIMARY KEY,
+    codpista INT NOT NULL ,
+    FOREIGN KEY (idpartido) REFERENCES partidos (idpartido),
+    FOREIGN KEY (codpista) REFERENCES pistas (codpista),
+);
