@@ -1,12 +1,14 @@
 <?php
 
+//require "../config.ini";
+
 class DBCon
 {
     private $con;
     
     public function __construct()
     {
-        $config = parse_ini_file("config.ini", TRUE);
+        $config = parse_ini_file("../config.ini", TRUE);
 
         $this->con = new mysqli($config["database"]["host"], $config["database"]["username"], $config["database"]["passwd"], $config["database"]["dbname"], $config["database"]["port"]);
 
