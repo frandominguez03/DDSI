@@ -1,5 +1,15 @@
 <?php
 include_once "dbcon.php";
+
+/* Gestión de los formularios */
+if($_SERVER["REQUEST_METHOD"] == "POST")
+{
+    if(!empty($_POST["codentrada"]) && !empty($_POST["tipoentrada"]) && !empty($_POST["precioentrada"]))
+    {
+        anadeTipoEntrada($_POST["codentrada"], $_POST["tipoentrada"], $_POST["precioentrada"]);
+    }
+}
+
 /*
  *  @brief Funcion que acepta una oferta dada  
  *  @param idOferta (El id de la oferta a aceptar)
