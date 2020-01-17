@@ -22,8 +22,8 @@ function aceptarOferta($idOferta):bool
     
 
     //Buscamos en la tabla ofertas, la oferta identificada por el id que se pasa como parámetro
-    $consulta = conexion->prepare("SELECT * FROM `ofertas` WHERE `codoferta` = $idOferta;")
-    if($consulta && $consulta->execute() && Sconsulta->store_result())
+    $consulta = $conexion->prepare("SELECT * FROM `ofertas` WHERE `codoferta` = $idOferta;");
+    if($consulta && $consulta->execute() && $consulta->store_result())
     {
         //Almacenamos en oferta el resultado de la consulta anterior
         $oferta = $consulta->get_result();
@@ -31,7 +31,7 @@ function aceptarOferta($idOferta):bool
         $consulta->close();
         //Buscamos si la oferta buscada se encuentra en la tabla de ofertas rechazadas
         $consulta = $conexion->prepare("SELECT COUNT(*) FROM `ofertasrechazadas` WHERE `codoferta` = $idOferta;");
-        if($consulta && $consulta->execute() && Sconsulta->store_result())
+        if($consulta && $consulta->execute() && $consulta->store_result())
         {
             $resultado = -1;
             $resultado = $consulta->get_result();
@@ -39,8 +39,8 @@ function aceptarOferta($idOferta):bool
             if($resultado == 0)
             {
                 //Si el resultado es 0 es que la oferta existe y no ha sido rechazada
-                $insercion = $conexion->("INSERT INTO `ofertasaceptadas` VALUES (?);");
-                if($insercion && $insercion->bind_param($idOferta) && $insercion->execute())
+                $insercion = $conexion->prepare("INSERT INTO `ofertasaceptadas` VALUES (?);");
+                if($insercion && $insercion->bind_param("i", $idOferta) && $insercion->execute())
                     return true;
                 else
                     throw new Exception("La oferta ya habia sido aceptada", 201902);   
@@ -72,7 +72,7 @@ function anadeTipoEntrada($codentrada, $tipo, $precio):bool
     $con = new DBCon();
     
     $insercion = $this->con->prepare("INSERT INTO `entradas` (`codentrada`, `tipo`, `tipo`) VALUES (?, ?, ?);");
-    if($insercion && $insercion->bind_param($codentrada, $tipo, $precio) && $insercion->execute())
+    if($insercion && $insercion->bind_param("isi", $codentrada, $tipo, $precio) && $insercion->execute())
         return true;
     
     else
