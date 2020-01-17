@@ -128,4 +128,50 @@ function mostrarPartidoPista($codpista){
     return false;
 }
 
+/*
+ *  @brief Se realiza una oferta a un árbitro
+ *  @param float salario Salario ofrecido al árbitro
+ *  @param int codarbitro Código del árbitro
+ */
+
+function ofertar($salario, $codarbitro){
+    $con = new DBcon();
+    $codoferta = 1;
+
+    // Toma el mayor código para añadir el siguiente
+    $consultaCod = $this->con->prepare("SELECT MAX(codcompra) FROM 'ofertas'");
+
+    if($consultaCod && $consultaCod->execute() && $consultaCod->store_result())
+        $codoferta = $consultaCod->get_result();
+
+    $consultaCod->close();
+    $codoferta++;
+
+    // Inserta la oferta en la base de datos
+    $insercionOf = $this->con->prepare("INSERT INTO `ofertas` (`codoferta`, `salario`) VALUES (?, ?);");
+    if($insercionOf && $insercionOf->bind_param($codoferta, $salario) && $insercionOf->execute()){
+        $insercionOf->close();
+        
+        $insercionGest = $this->con->prepare("INSERT INTO `gestiona` (`codarbitro`, `codoferta`) VALUES (?, ?);");
+        if($insercionGest && $insercionGest->bind_param($codarbitro, $codoferta) && $insercionGest->execute()){
+
+            $insercionGest->close();
+            $con->close();
+
+            return true;
+        }
+        
+        else
+            throw new Exception("Error al asociar la oferta con el arbitro", 201902);
+    }
+    
+    else
+        throw new Exception("Error al insertar la oferta en la base de datos", 201902);
+    
+    $insercionOf->close();
+    $con->close();
+
+    return false;
+}
+
 ?>
