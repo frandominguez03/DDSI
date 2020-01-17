@@ -16,8 +16,18 @@ INSERT INTO ofertas VALUES('5','2','1500','5','1999');
 
 INSERT INTO ofertasrechazadas VALUES('5');
 
-INSERT INTO ofertas VALUES('6','2','2000','5','1999');
+INSERT INTO ofertas VALUES('6','2','2000','5','1999')
 
+-- Prueba disparador 1
+
+INSERT INTO edicion VALUES('5', '1999');
+INSERT INTO usuarios VALUES('58', 'manolo@mail.com', 'Manolillo', 'Pies de plata');
+
+INSERT INTO comprasPorUsuariosEnEdicion VALUES('123', '58', '5', '1999');
+INSERT INTO comprasiniciadas VALUES('123');
+
+INSERT INTO comprasPorUsuariosEnEdicion VALUES('124', '58', '5', '1999');
+INSERT INTO comprasiniciadas VALUES('124');
 -- Prueba disparador 4
 
 INSERT INTO edicion VALUES('5', '1999');
