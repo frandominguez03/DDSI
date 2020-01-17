@@ -141,7 +141,12 @@ CREATE TABLE  compraspagadas (
 
 CREATE TABLE  ofertas (
     codoferta INT NOT NULL PRIMARY KEY,
-    salario INT NOT NULL
+    codarbitro INT NOT NULL ,
+    salario INT NOT NULL,
+    numedicion INT NOT NULL ,
+    anoedicion INT NOT NULL,
+    FOREIGN KEY (codarbitro) REFERENCES arbitros (codarbitro),
+    FOREIGN KEY (numedicion,anoedicion) REFERENCES edicion(numedicion,anoedicion)
 );
 
 -- -----------------------------------------------------
@@ -201,17 +206,6 @@ CREATE TABLE  arbitra(
     PRIMARY KEY(codarbitro,idpartido)
 );
 
--- -----------------------------------------------------
--- Table gestiona
--- -----------------------------------------------------
-
-CREATE TABLE  gestiona(
-    codarbitro INT NOT NULL ,
-    codoferta INT NOT NULL ,
-    FOREIGN KEY (codarbitro) REFERENCES arbitros (codarbitro),
-    FOREIGN KEY (codoferta) REFERENCES ofertas (codoferta),
-    PRIMARY KEY(codarbitro,codoferta)
-);
 
 -- -----------------------------------------------------
 -- Table ofertar
