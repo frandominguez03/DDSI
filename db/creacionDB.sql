@@ -315,12 +315,13 @@ CREATE TABLE  juegan(
 );
 
 -- -----------------------------------------------------
--- Table partidosenpista
+-- Table Partidos en pista
 -- -----------------------------------------------------
+
 
 CREATE TABLE  partidosenpista(
     idpartido INT NOT NULL PRIMARY KEY,
-    codpista INT NOT NULL ,
+    codpista INT NOT NULL,
     FOREIGN KEY (idpartido) REFERENCES partidos (idpartido),
     FOREIGN KEY (codpista) REFERENCES pistas (codpista)
 );

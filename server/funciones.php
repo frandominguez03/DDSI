@@ -40,8 +40,27 @@ function aceptarOferta($idOferta):bool
         }else
             throw new Exception("La oferta ya ha sido rechazada", 201902);
     }
-    
+
     return false; 
+}
+
+/*
+ * @brief Consulta las ofertas disponibles para un árbitro
+ * @param idDelArbitro
+ * @return El resultado de la consulta
+*/
+function ofertasDisponibles($idArbitro,$edicion)
+{
+    $con = new DBCon();
+    $consulta = this->con->prepare("SELECT * FROM ((SELECT codoferta FROM ofertas WHERE codarbitro='$idArbitro' MINUS SELECT * FROM ofertasrechazadas) MINUS SELECT * FROM ofertasaceptadas) CON, ofertas O WHERE CON.codoferta = O.CODOFERTA;");
+    while($oferta = $consulta->fetch_assoc() )
+    {
+        echo $oferta['codoferta'];
+        echo $oferta['salario'];
+        echo $oferta['anoedicion'];
+        echo $oferta['numedicion'];
+    }
+    $consulta->close();
 }
 
 /*
