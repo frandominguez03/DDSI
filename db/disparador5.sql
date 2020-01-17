@@ -6,11 +6,15 @@ CREATE OR REPLACE TRIGGER horaDiferencia
 DECLARE
   totalHoras INTEGER;
 BEGIN
-    SELECT TO_DATE(fechaInicio,'YYYY-MM-DD HH:MM:SS') - TO_DATE(fechaFin,'YYYY-MM-DD HH:MM:SS') INTO totalHoras FROM asignar WHERE codtrabajador = :new.codtrabajador;
+    CURSOR horas IS SELECT fechaInicio, fechaFin FROM asignar WHERE codtrabajador = :new.codtrabajador 
+    and TO_CHAR(fechaInicio,'YYY-MM-DD') = TO_CHAR(new:fechaInicio,'YYY-MM-DD') and TO_CHAR(fechaFin,'YYY-MM-DD') = TO_CHAR(new:fechaFin,'YYY-MM-DD');
     
-    IF(totalHoras < 10000)
-      THEN raise_application_error(-20600, :new.codtrabajador || 'No se le puede asignar el trabajo con menos de 1 hora de diferencia');
-    END IF;
+    FOR fecha IN horas LOOP
+      IF fecha.fechaFin + 1/24 > :new.fechaInicio AND fecha.fechaFin < :new.fechaInicio
+        THEN raise_application_error(-20600, :new.codtrabajador || 'No se le puede asignar el trabajo con menos de 1 hora de diferencia');
+      END IF;
+    END LOOP;
+
 END;
 
 
