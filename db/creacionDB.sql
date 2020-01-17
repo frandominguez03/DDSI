@@ -284,13 +284,15 @@ CREATE TABLE  participan(
 -- Table asignar
 -- -----------------------------------------------------
 
+drop table asignar;
+
 CREATE TABLE  asignar(
     codtrabajador INT NOT NULL ,
     numedicion INT NOT NULL ,
     anoedicion INT NOT NULL,
     codpista INT NOT NULL ,
-    fechaInicio DATE NOT NULL,
-    fechaFin DATE NOT NULL,
+    fechaInicio DATE  NOT NULL,
+    fechaFin DATE  NOT NULL,
     FOREIGN KEY (codtrabajador) REFERENCES trabajadores (codtrabajador),
     FOREIGN KEY (codpista) REFERENCES pistas (codpista),
     FOREIGN KEY (numedicion,anoedicion) REFERENCES edicion (numedicion,anoedicion),
