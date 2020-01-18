@@ -29,16 +29,6 @@ INSERT INTO comprasiniciadas VALUES('123');
 INSERT INTO comprasPorUsuariosEnEdicion VALUES('124', '58', '5', '1999');
 INSERT INTO comprasiniciadas VALUES('124');
 
-<<<<<<< HEAD
-INSERT INTO asignar VALUES('5', '5', '1999', '12', TO_DATE('12/03/1999 09:00:00', 'DD/MM/YYYY hh24:mi:ss'), TO_DATE('12/03/1999 10:30:00', 'DD/MM/YYYY hh24:mi:ss'));
-
-INSERT INTO asignar VALUES('5', '5', '1999', '12', TO_DATE('12/03/1999 12:00:00', 'DD/MM/YYYY hh24:mi:ss'), TO_DATE('12/03/1999 15:00:00', 'DD/MM/YYYY hh24:mi:ss'));
-
-INSERT INTO asignar VALUES('5', '5', '1999', '12', TO_DATE('12/03/1999 15:30:00', 'DD/MM/YYYY hh24:mi:ss'), TO_DATE('12/03/1999 19:00:00', 'DD/MM/YYYY hh24:mi:ss'));
-
-
-
-=======
 -- Prueba disparador 4
 
 INSERT INTO edicion VALUES('5', '1999');
@@ -48,7 +38,11 @@ INSERT INTO trabajadores VALUES('6', 'asdfmanolo@fda.tl', '32234234', 'wafdmanol
 
 INSERT INTO pistas VALUES('12', 'paquillo', '2', '1234');
 
-INSERT INTO asignar VALUES('5', '5', '1999', '12', TO_DATE('12/03/1999 09:00:00', 'DD/MM/YYYY hh24:mi:ss'), TO_DATE('12/03/1999 11:00:00', 'DD/MM/YYYY hh24:mi:ss'));
-INSERT INTO asignar VALUES('5', '5', '1999', '12', TO_DATE('12/03/1999 13:00:00', 'DD/MM/YYYY hh24:mi:ss'), TO_DATE('12/03/1999 15:00:00', 'DD/MM/YYYY hh24:mi:ss'));
-INSERT INTO asignar VALUES('5', '5', '1999', '12', TO_DATE('13/03/1999 17:00:00', 'DD/MM/YYYY hh24:mi:ss'), TO_DATE('13/03/1999 19:00:00', 'DD/MM/YYYY hh24:mi:ss'));
->>>>>>> 8fb105f2429360fc3e8a204875ee37eb1b0c38d2
+-- Prueba disparador 5
+
+INSERT INTO asignar VALUES('5', '5', '1999', '12', TO_DATE('12/03/1999 09:00:00', 'DD/MM/YYYY hh24:mi:ss'), TO_DATE('12/03/1999 10:00:00', 'DD/MM/YYYY hh24:mi:ss'));
+INSERT INTO asignar VALUES('5', '5', '1999', '12', TO_DATE('12/03/1999 19:00:00', 'DD/MM/YYYY hh24:mi:ss'), TO_DATE('12/03/1999 20:00:00', 'DD/MM/YYYY hh24:mi:ss'));
+INSERT INTO asignar VALUES('5', '5', '1999', '12', TO_DATE('12/03/1999 14:01:00', 'DD/MM/YYYY hh24:mi:ss'), TO_DATE('12/03/1999 15:00:00', 'DD/MM/YYYY hh24:mi:ss'));
+INSERT INTO asignar VALUES('5', '5', '1999', '12', TO_DATE('12/03/1999 16:00:00', 'DD/MM/YYYY hh24:mi:ss'), TO_DATE('12/03/1999 17:00:00', 'DD/MM/YYYY hh24:mi:ss'));
+INSERT INTO asignar VALUES('5', '5', '1999', '12', TO_DATE('12/03/1999 21:00:00', 'DD/MM/YYYY hh24:mi:ss'), TO_DATE('12/03/1999 22:00:00', 'DD/MM/YYYY hh24:mi:ss'));
+

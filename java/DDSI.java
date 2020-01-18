@@ -41,16 +41,16 @@ public class DDSI {
         }
     }
     
-    public boolean asignarTrabajador(int codtrabajador, int numedicion, int anoedicion, int codpista, Date fechaInicio, Date fechaFin) throws Exception{
+    public boolean asignarTrabajador(int codtrabajador, int numedicion, int anoedicion, int codpista, Timestamp fechaInicio, Timestamp fechaFin) throws Exception{
         try
         {
-            pstmt = con.prepareStatement("INSERT INTO ASIGANR VALUES(?,?,?,?,?,?)");
+            pstmt = con.prepareStatement("INSERT INTO asignar VALUES(?,?,?,?,?,?)");
             pstmt.setInt(1, codtrabajador);
             pstmt.setInt(2, numedicion);
             pstmt.setInt(3, anoedicion);
             pstmt.setInt(4, codpista);
-            pstmt.setDate(5, fechaInicio);
-            pstmt.setDate(6, fechaFin);
+            pstmt.setTimestamp(5, fechaInicio);
+            pstmt.setTimestamp(6, fechaFin);
             pstmt.executeUpdate();
             con.commit();
             return true; // return OK
@@ -61,6 +61,15 @@ public class DDSI {
             System.out.println("Error al asignar trabajador" + e);
             return false; // return error
         }  
+    }
+    
+    public void mostrarTrabajadoresAsignados()throws Exception{
+        stmt = con.createStatement();
+        ResultSet rset = stmt.executeQuery("SELECT * FROM asignar");
+        
+        while (rset.next()){
+            System.out.println( rset.getInt(1));
+        }
     }
     
     public void mostrarPartidosPista(int codpista) throws Exception{
