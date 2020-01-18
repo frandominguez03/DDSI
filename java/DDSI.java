@@ -68,7 +68,7 @@ public class DDSI {
         ResultSet rset = stmt.executeQuery("SELECT * FROM asignar");
         
         while (rset.next()){
-            System.out.println( rset.getInt(1));
+            System.out.println( rset.getInt(1) + " " + rset.getInt(2) + " " + rset.getInt(3) + " " + rset.getInt(4) + " " + rset.getString(5) + " " + rset.getString(6));
         }
     }
     
