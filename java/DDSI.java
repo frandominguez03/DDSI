@@ -76,8 +76,10 @@ public class DDSI {
         stmt = con.createStatement();
         ResultSet rset = stmt.executeQuery("SELECT IDPARTIDO FROM PARTIDOSENPISTA where CODPISTA = " + codpista + " ");
         
+        System.out.println("Los partidos jugados en la pista "+ codpista + " son:");
+        
         while (rset.next ()){
-            System.out.println( rset.getInt(1));
+            System.out.println("Partido "+rset.getInt(1));
         }
     }
     

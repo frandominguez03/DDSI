@@ -76,3 +76,5 @@ INSERT INTO ofertas VALUES('12','4','1500','5','1999');
 
     INSERT INTO juegan VALUES('1','5','2','1999');
     INSERT INTO juegan VALUES('2','5','2','1999');
+    
+    INSERT INTO partidosenpista VALUES('1','12');
