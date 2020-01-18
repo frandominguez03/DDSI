@@ -54,3 +54,25 @@ INSERT INTO asignar VALUES('5', '5', '1999', '12', TO_DATE('12/03/1999 21:00:00'
 INSERT INTO ofertas VALUES('10','4','1500','5','1999');
 INSERT INTO ofertas VALUES('11','4','1500','5','1999');
 INSERT INTO ofertas VALUES('12','4','1500','5','1999');
+
+
+-- Prueba disparador 2 
+
+    -- Este da error
+    INSERT INTO partidos VALUES('1',TO_DATE('12/03/1999 09:00:00', 'DD/MM/YYYY hh24:mi:ss'), 0);
+
+    INSERT INTO jugadores VALUES('1','paco@gmail.com','643616263','paco','elmaquina');
+    INSERT INTO jugadores VALUES('2','manolo@gmail.com','643616263','manolo','eltitan');
+    INSERT INTO jugadores VALUES('3','juan@gmail.com','643616263','juan','elbestia');
+
+    INSERT INTO edicion VALUES('5', '1999');
+
+    INSERT INTO juegan VALUES('1','5','1','1999');
+    INSERT INTO juegan VALUES('2','5','1','1999');
+    INSERT INTO juegan VALUES('3','5','1','1999');
+
+    -- Este esta bien
+    INSERT INTO partidos VALUES('2',TO_DATE('13/03/1999 09:00:00', 'DD/MM/YYYY hh24:mi:ss'), 1);
+
+    INSERT INTO juegan VALUES('1','5','2','1999');
+    INSERT INTO juegan VALUES('2','5','2','1999');
