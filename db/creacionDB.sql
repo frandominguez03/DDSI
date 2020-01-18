@@ -163,7 +163,7 @@ CREATE TABLE  contraofertas (
 -- -----------------------------------------------------
 
 CREATE TABLE  ofertasaceptadas (
-    codoferta INT NOT NULL ,
+    codoferta INT NOT NULL PRIMARY KEY,
     FOREIGN KEY (codoferta) REFERENCES ofertas (codoferta)
 );
 
@@ -172,7 +172,7 @@ CREATE TABLE  ofertasaceptadas (
 -- -----------------------------------------------------
 
 CREATE TABLE  ofertasrechazadas (
-    codoferta INT NOT NULL ,
+    codoferta INT NOT NULL PRIMARY KEY ,
     FOREIGN KEY (codoferta) REFERENCES ofertas (codoferta)
 );
 
@@ -181,7 +181,7 @@ CREATE TABLE  ofertasrechazadas (
 -- -----------------------------------------------------
 
 CREATE TABLE  contraofertasaceptadas (
-    codcontraoferta INT NOT NULL ,
+    codcontraoferta INT NOT NULL PRIMARY KEY,
     FOREIGN KEY (codcontraoferta) REFERENCES contraofertas (codcontraoferta)
 );
 
@@ -190,7 +190,7 @@ CREATE TABLE  contraofertasaceptadas (
 -- -----------------------------------------------------
 
 CREATE TABLE  contraofertasrechazadas (
-    codcontraoferta INT NOT NULL ,
+    codcontraoferta INT NOT NULL PRIMARY KEY,
     FOREIGN KEY (codcontraoferta) REFERENCES contraofertas (codcontraoferta)
 );
 

@@ -115,6 +115,97 @@ public class DDSI {
         }
     }
 
+    public boolean gestionaOferta() throws Exception 
+    {
+        int idArbitro, numEdicion, anoEdicion, idOferta;
+        Scanner capt = new Scanner(System.in);
+        System.out.println("Introduzca su código de árbitro : ");
+        //idArbitro = capt.nextInt();
+        idArbitro = 4;
+        System.out.println("Bienvenido árbitro número "+idArbitro+" , introduzca el número de edición y el año para el que quiere realizar la consulta");
+        //numEdicion = capt.nextInt();
+        //anoEdicion = capt.nextInt();
+        numEdicion = 5;
+        anoEdicion = 1999;
+        
+        if(this.mostrarOfertasDisponibles(idArbitro, numEdicion, anoEdicion))
+        {
+        System.out.println("Introduce el código de la oferta que quieres aceptar ");
+        //idOferta = capt.nextInt();
+        idOferta = 10;
+        if(this.aceptarOferta(idOferta,idArbitro,numEdicion,anoEdicion))
+        {
+                System.out.println("Se ha aceptado la oferta "+idOferta+" correctamente!");
+                return true;
+            }else 
+            {
+                System.out.println("Lo sentimos ha habido un error... Contacta con el administrador del sistema para más información");
+                return false;   
+            }
+        }else{
+            System.out.println("No puedes gestionar ofertas para la edición introducida");
+            return false;
+        }
+        
+    }
+    
+    public boolean puedeGestionar(int idArbitro, int numEdicion, int anoEdicion) throws Exception 
+    {
+        int contadorAcept = 0;
+        int contadorRech = 0;
+        stmt = con.createStatement();
+        ResultSet rset = stmt.executeQuery("SELECT * FROM OFERTAS O, OFERTASACEPTADAS O_ACEPT WHERE O.codoferta = O_ACEPT.codoferta AND codarbitro = "+idArbitro+" AND numedicion = "+numEdicion+" AND anoedicion = "+anoEdicion+"");
+        while (rset.next ()){
+            contadorAcept++;
+        }
+        
+        ResultSet rset2 = stmt.executeQuery("SELECT * FROM OFERTAS O, OFERTASRECHAZADAS O_RECH WHERE O.codoferta = O_RECH.codoferta AND codarbitro = "+idArbitro+" AND numedicion = "+numEdicion+" AND anoedicion = "+anoEdicion+"");
+
+        while (rset2.next ()){
+            contadorRech++;
+        }
+        
+        if(contadorAcept > 0 || contadorRech > 0){
+            return false; //Se ha aceptado o rechazado una oferta
+        }
+        else
+            return true; //No se ha aceptado o rechazado ninguna oferta
+    }
+    
+    public boolean mostrarOfertasDisponibles(int idArbitro,int numEdicion, int anoEdicion) throws Exception
+    {
+        if(this.puedeGestionar(idArbitro, numEdicion, anoEdicion)) 
+        {
+            stmt = con.createStatement();
+            ResultSet rset = stmt.executeQuery("SELECT * FROM OFERTAS WHERE codarbitro = "+idArbitro+" AND numedicion = "+numEdicion+" AND anoedicion = "+anoEdicion+"");
+            while (rset.next ()){
+                System.out.println( rset.getInt(1) + " " + rset.getInt(2)+ " " + rset.getInt(3));
+            }
+            return true;
+        }else
+            return false;    
+            
+    }
+    public boolean aceptarOferta(int idOferta,int idArbitro, int numEdicion, int anoEdicion) throws Exception 
+    {
+        int contador = 0;
+        stmt = con.createStatement();
+        ResultSet rset = stmt.executeQuery("SELECT * FROM OFERTAS WHERE codarbitro = "+idArbitro+" AND numedicion = "+numEdicion+" AND anoedicion = "+anoEdicion+"");
+        while (rset.next ()){
+            contador++;
+        }
+        if(contador > 0)
+        {
+            pstmt = con.prepareStatement("INSERT INTO ofertasaceptadas VALUES(?)");
+            pstmt.setInt(1, idOferta);
+            pstmt.executeUpdate();
+            con.commit();
+            return true;
+        }else
+            return false;
+    }
+
+
     public static void main(String[] args) throws Exception {
         DDSI inst1 = new DDSI();
         
