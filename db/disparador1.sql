@@ -1,18 +1,20 @@
 -- Disparador para impedir que el mismo usuario pueda iniciar más de una compra al mismo tiempo
-create or replace TRIGGER compraSimultanea
+
+create or replace TRIGGER comprasusuario
     BEFORE
-    INSERT ON COMPRASPORUSUARIOSENEDICION
+      INSERT ON comprasiniciadas
     FOR EACH ROW
 DECLARE
-    cuentainicializada INTEGER;
-    cuentafinalizada INTEGER;
+    comprasActivas INTEGER;
+    usuario INTEGER;
 
 BEGIN
-    SELECT count(*) INTO cuentainicializada FROM comprasiniciadas WHERE codcompra = :new.codcompra;
-    SELECT count(*) INTO cuentafinalizada FROM comprasfinalizadas WHERE codcompra = :new.codcompra;
+    SELECT coduser INTO usuario FROM comprasPorUsuariosEnEdicion WHERE codcompra = :new.codcompra;
+    SELECT COUNT(X.codcompra) INTO comprasActivas FROM comprasiniciadas X, comprasPorUsuariosEnEdicion Y
+                                          WHERE X.codcompra = Y.codcompra AND usuario = Y.coduser;
 
-    IF(cuentainicializada > cuentafinalizada)
+    IF(comprasActivas > 0)
     THEN raise_application_error
-    (-20600,:new.coduser||'No se puede iniciar mas de una compra a la vez');
+    (-20600,:new.codcompra||'No se puede iniciar mas de una compra a la vez con el mismo usuario');
     END IF;
 END;
