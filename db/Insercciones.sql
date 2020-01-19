@@ -101,4 +101,5 @@ INSERT INTO partidosenpista VALUES('1','12');
 SELECT * FROM partidosenpista WHERE codpista = 12;
 
 -- Prueba aceptar oferta
-
+SELECT * FROM ofertas;
+SELECT * FROM ofertasaceptadas;

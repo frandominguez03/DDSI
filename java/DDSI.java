@@ -116,7 +116,7 @@ public class DDSI {
         }
     }
 
-    public boolean gestionaOferta( int idArbitro, int numEdicion, int anoEdicion) throws Exception 
+    public boolean gestionaOferta( int idArbitro) throws Exception 
     {
         int numEdicion, anoEdicion, idOferta;
         Scanner capt = new Scanner(System.in);
