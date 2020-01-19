@@ -1,10 +1,10 @@
 ## Funciones
 
-* **F** Añadir tipo entrada
-* **C** Mostrar partidos de una pista
-* **M** Aceptar oferta
-* **P** Ofertar
-* **D** Asignar trabajador
+* [x] **F** Añadir tipo entrada
+* [x] **C** Mostrar partidos de una pista
+* [ ] **M** Aceptar oferta
+* [x] **P** Ofertar
+* [x] **D** Asignar trabajador
 
 ## Disparadores
 

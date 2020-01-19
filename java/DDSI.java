@@ -1,6 +1,7 @@
-package ddsi1;
+package ddsi;
 import java.sql.*;
 import java.sql.SQLException.*;
+import java.util.Scanner;
 import oracle.jdbc.driver.*;
 
 public class DDSI {
@@ -15,7 +16,7 @@ public class DDSI {
     public void initialize() throws Exception {
         DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
         
-        con = DriverManager.getConnection("jdbc:oracle:thin:@oracle0.ugr.es:1521/practbd.oracle0.ugr.es", "x5936034","x5936034");
+        con = DriverManager.getConnection("jdbc:oracle:thin:@oracle0.ugr.es:1521/practbd.oracle0.ugr.es", "x7035152","x7035152");
         
         con.setAutoCommit (false);
         
@@ -72,15 +73,17 @@ public class DDSI {
         }
     }
     
-    public void mostrarPartidosPista(int codpista) throws Exception{
+    public String mostrarPartidosPista(int codpista) throws Exception{
         stmt = con.createStatement();
         ResultSet rset = stmt.executeQuery("SELECT IDPARTIDO FROM PARTIDOSENPISTA where CODPISTA = " + codpista + " ");
         
-        System.out.println("Los partidos jugados en la pista "+ codpista + " son:");
+        String salida = "Los partidos jugados en la pista "+ codpista + " son:\n";
         
         while (rset.next ()){
-            System.out.println("Partido "+rset.getInt(1));
+            salida += "Partido "+rset.getInt(1)+"\n";
         }
+
+        return salida;
     }
     
     public void getTipoEntrada(int codentrada) throws Exception{
@@ -92,11 +95,7 @@ public class DDSI {
         }
     }
     
-    public boolean ofertar(float salario, int codarbitro, int numedicion, int anoedicion) throws Exception{
-        stmt = con.createStatement();
-        ResultSet rset = stmt.executeQuery("SELECT MAX(CODOFERTA) FROM OFERTAS");
-        int codoferta = rset.getInt(1)+1;
-        
+    public boolean ofertar(int codoferta, float salario, int codarbitro, int numedicion, int anoedicion) throws Exception{      
         try
         {
             pstmt = con.prepareStatement("INSERT INTO OFERTAS VALUES(?,?,?,?,?)");
@@ -117,9 +116,9 @@ public class DDSI {
         }
     }
 
-    public boolean gestionaOferta() throws Exception 
+    public boolean gestionaOferta( int idArbitro, int numEdicion, int anoEdicion) throws Exception 
     {
-        int idArbitro, numEdicion, anoEdicion, idOferta;
+        int numEdicion, anoEdicion, idOferta;
         Scanner capt = new Scanner(System.in);
         System.out.println("Introduzca su código de árbitro : ");
         //idArbitro = capt.nextInt();

@@ -78,3 +78,27 @@ INSERT INTO ofertas VALUES('12','4','1500','5','1999');
     INSERT INTO juegan VALUES('2','5','2','1999');
     
     INSERT INTO partidosenpista VALUES('1','12');
+    
+-- Prueba función añadir tipo de entrada
+SELECT * FROM entradas;
+
+-- Prueba función ofertar
+INSERT INTO arbitros VALUES('1','manolo@correo.tk','666666666','Manolo','Manolo');
+INSERT INTO edicion VALUES('5', '1999');
+SELECT * FROM ofertas;
+
+-- Prueba función asignar trabajador
+DELETE FROM asignar WHERE codtrabajador=5;
+INSERT INTO trabajadores VALUES('5', 'manolo@fda.tl', '234234', 'manolo', 'paco');
+INSERT INTO edicion VALUES('5', '1999');
+INSERT INTO pistas VALUES('12', 'paquillo', '2', '1234');
+SELECT * FROM asignar;
+
+-- Prueba partidos en pista
+INSERT INTO partidos VALUES('1',TO_DATE('12/03/1999 09:00:00', 'DD/MM/YYYY hh24:mi:ss'), 0);
+INSERT INTO pistas VALUES('12', 'paquillo', '2', '1234');
+INSERT INTO partidosenpista VALUES('1','12');
+SELECT * FROM partidosenpista WHERE codpista = 12;
+
+-- Prueba aceptar oferta
+
