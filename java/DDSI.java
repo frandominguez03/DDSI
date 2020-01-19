@@ -187,7 +187,7 @@ public class DDSI {
             return false;    
             
     }
-    public boolean aceptarOferta(int idOferta,int idArbitro, int numEdicion, int anoEdicion) throws Exception 
+     public boolean aceptarOferta(int idOferta,int idArbitro, int numEdicion, int anoEdicion) throws Exception 
     {
         int contador = 0;
         stmt = con.createStatement();
@@ -195,7 +195,7 @@ public class DDSI {
         while (rset.next ()){
             contador++;
         }
-        if(contador > 0)
+        if(contador > 0 && this.puedeGestionar(idArbitro, numEdicion, anoEdicion))
         {
             pstmt = con.prepareStatement("INSERT INTO ofertasaceptadas VALUES(?)");
             pstmt.setInt(1, idOferta);
