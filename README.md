@@ -6,7 +6,7 @@ Se implementan diversos disparadores en SQL junto con los scripts de creación, 
 
 ## Autores
 Francisco Beltrán Sánchez ([@currobeltran](https://github.com/currobeltran))  
-Pablo Cordero Romero ([@corderop](https://github.com/corderop)) 
+Pablo Cordero Romero ([@corderop](https://github.com/corderop))  
 Francisco Domínguez Lorente  
 David Gómez Hernández ([@davidgmezhdez](https://github.com/davidgmezhdez))  
 Miguel Ángel Posadas Arráez ([@migue99angel](https://github.com/migue99angel))  
